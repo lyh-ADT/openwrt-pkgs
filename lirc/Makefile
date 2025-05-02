@@ -10,12 +10,12 @@ include $(TOPDIR)/rules.mk
 include $(INCLUDE_DIR)/kernel.mk
 
 PKG_NAME:=lirc
-PKG_VERSION:=0.9.2a
+PKG_VERSION:=0.10.2
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 PKG_SOURCE_URL:=@SF/${PKG_NAME}
-PKG_MD5SUM:=639a14ed0b3b34ae227a047b952ea368
+PKG_MD5SUM:=cb96cfb0af8067c0062e2f5a100f426a
 
 PKG_BUILD_PARALLEL:=1
 
@@ -32,6 +32,10 @@ define Package/lirc
     TITLE:=LIRC - Linux Infrared Remote Control
     DEPENDS:=+libpthread @!LINUX_2_6
     MENU:=1
+endef
+
+define Package/lirc/extra_provides
+	echo "libstdc++.so.6"
 endef
 
 define Package/lirc/description
