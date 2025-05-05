@@ -110,7 +110,7 @@ endef
 
 define  Package/lirc-ftdi
     $(call Package/lirc/Default)
-    DEPENDS:=lirc +libftdi +libusb
+    DEPENDS:=lirc +libftdi +libusb-1.0 +libusb-compat
     TITLE:=plugin ftdi
 endef
 
