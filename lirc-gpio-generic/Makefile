@@ -14,9 +14,9 @@ PKG_RELEASE:=1
 include $(INCLUDE_DIR)/package.mk
 
 define KernelPackage/lirc_gpio_generic
-  SUBMENU:=Other modules
-  DEPENDS:=
-  KCONFIG:= \
+	SUBMENU:=Other modules
+	DEPENDS:=
+	KCONFIG:= \
 	CONFIG_MEDIA_SUPPORT=y \
 	CONFIG_INPUT=y \
 	CONFIG_MEDIA_RC_SUPPORT=y \
@@ -40,23 +40,23 @@ define KernelPackage/lirc_gpio_generic
 	CONFIG_LIRC_SIR=n \
 	CONFIG_LIRC_ZILOG=n \
 	CONFIG_RC_LOOPBACK=n
-  TITLE:=Driver for LIRC GPIO receiver/transmitter
-  FILES:=$(PKG_BUILD_DIR)/lirc_gpio_generic.ko
-  AUTOLOAD:=$(call AutoLoad,99,lirc_gpio_generic)
+	TITLE:=Driver for LIRC GPIO receiver/transmitter
+	FILES:=$(PKG_BUILD_DIR)/lirc_gpio_generic.ko
+	AUTOLOAD:=$(call AutoLoad,99,lirc_gpio_generic)
 endef
 
 define KernelPackage/lirc_gpio_generic/description
-  LIRC kernel module to emulate IR receiver/transmitter
-  with GPIOs on any target.
-  
-  *************************************************************
-  * This kernel module ONLY works if the device has GPIO IRQs * 
-  * implemented in the GPIO driver.                           *
-  *************************************************************
+	LIRC kernel module to emulate IR receiver/transmitter
+	with GPIOs on any target.
+	
+	*************************************************************
+	* This kernel module ONLY works if the device has GPIO IRQs * 
+	* implemented in the GPIO driver.													 *
+	*************************************************************
 
-  OpenWrt version tested
-  --------------
-  OK: Barrier Breaker
+	OpenWrt version tested
+	--------------
+	OK: Barrier Breaker
 endef
 
 define Build/Prepare

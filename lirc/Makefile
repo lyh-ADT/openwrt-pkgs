@@ -22,16 +22,16 @@ PKG_BUILD_PARALLEL:=1
 include $(INCLUDE_DIR)/package.mk
 
 define Package/lirc/Default
-    SECTION:=utils
-    CATEGORY:=Utilities
-    URL:=http://lirc.org/
+		SECTION:=utils
+		CATEGORY:=Utilities
+		URL:=http://lirc.org/
 endef
 
 define Package/lirc
-    $(call Package/lirc/Default)
-    TITLE:=LIRC - Linux Infrared Remote Control
-    DEPENDS:=+libpthread @!LINUX_2_6
-    MENU:=1
+		$(call Package/lirc/Default)
+		TITLE:=LIRC - Linux Infrared Remote Control
+		DEPENDS:=+libpthread @!LINUX_2_6
+		MENU:=1
 endef
 
 define Package/lirc/extra_provides
@@ -39,10 +39,10 @@ define Package/lirc/extra_provides
 endef
 
 define Package/lirc/description
-  LIRC is a package that allows you to decode and send 
-  infra-red signals of many (but not all) commonly used 
-  remote controls.
-  This package contains only lircd and lircd.conf!
+	LIRC is a package that allows you to decode and send 
+	infra-red signals of many (but not all) commonly used 
+	remote controls.
+	This package contains only lircd and lircd.conf!
 
 tested drivers
 --------------
@@ -57,69 +57,69 @@ todo
 
 endef
 
-define  Package/lirctools
-    $(call Package/lirc/Default)
-    DEPENDS:=lirc
-    TITLE:=LIRC tools
+define	Package/lirctools
+		$(call Package/lirc/Default)
+		DEPENDS:=lirc
+		TITLE:=LIRC tools
 endef
 
 define Package/lirctools/description
-  This package contains those lirc-tools:
-   -irexec:   execute programs according to the pressed remote control buttons
-   -irsend:   application for sending IR-codes via lirc
-   -irrecord: record the signals from your remote control and create a config file for lircd
-   -irw:      watch the codes as lircd recognize them
-   -mode2:    shows the pulse/space length of a remote button
-   
-  NOT included:
-   -ircat:   prints config strings to standard output, can be used to provide remote control input to scripts
-   -irpty:   pseudo tty driver. Connects to lircd via socket to receive infra-red codes and converts them to key strokes
-   -irsimreceive
-   -irsimsend
-   -irtescase
-   -lirc-lsplugins
-   -lirc-lsremotes
+	This package contains those lirc-tools:
+	 -irexec:	 execute programs according to the pressed remote control buttons
+	 -irsend:	 application for sending IR-codes via lirc
+	 -irrecord: record the signals from your remote control and create a config file for lircd
+	 -irw:			watch the codes as lircd recognize them
+	 -mode2:		shows the pulse/space length of a remote button
+	 
+	NOT included:
+	 -ircat:	 prints config strings to standard output, can be used to provide remote control input to scripts
+	 -irpty:	 pseudo tty driver. Connects to lircd via socket to receive infra-red codes and converts them to key strokes
+	 -irsimreceive
+	 -irsimsend
+	 -irtescase
+	 -lirc-lsplugins
+	 -lirc-lsremotes
 endef
 
-define  Package/lirc-audioalsa
-    $(call Package/lirc/Default)
-    DEPENDS:=lirc +alsa-lib
-    TITLE:=plugin audio_alsa
+define	Package/lirc-audioalsa
+		$(call Package/lirc/Default)
+		DEPENDS:=lirc +alsa-lib
+		TITLE:=plugin audio_alsa
 endef
 
 define Package/lirc-audioalsa/description
-  Contains this additional plugin:
-   -plugin audio_alsa:
-       Implemented routines for using a IR receiver connected to soundcard ADC.
-       Uses ALSA sound interface. It does not require any kernel module. It uses
-       alsa-lib for connecting to the audio card and detect codes coming from a 
-       sound line input.
+	Contains this additional plugin:
+	 -plugin audio_alsa:
+			 Implemented routines for using a IR receiver connected to soundcard ADC.
+			 Uses ALSA sound interface. It does not require any kernel module. It uses
+			 alsa-lib for connecting to the audio card and detect codes coming from a 
+			 sound line input.
 endef
 
-define  Package/lirc-devinput
-    $(call Package/lirc/Default)
-    DEPENDS:=lirc +kmod-hid
-    TITLE:=plugin devinput
+define	Package/lirc-devinput
+		$(call Package/lirc/Default)
+		DEPENDS:=lirc +kmod-hid
+		TITLE:=plugin devinput
 endef
 
 define Package/lirc-devinput/description
-  Contains this additional plugin:
-   -plugin devinput:
-       receive keycodes input via /dev/input/...
+	Contains this additional plugin:
+	 -plugin devinput:
+			 receive keycodes input via /dev/input/...
 endef
 
-define  Package/lirc-ftdi
-    $(call Package/lirc/Default)
-    DEPENDS:=lirc +libftdi +libusb-1.0 +libusb-compat
-    TITLE:=plugin ftdi
+define	Package/lirc-ftdi
+		$(call Package/lirc/Default)
+		DEPENDS:=lirc +libftdi +libusb-1.0 +libusb-compat
+		TITLE:=plugin ftdi
 endef
 
 define Package/lirc-ftdi/description
-  Contains this additional plugin:
-   -plugin ftdi:
-       Mode2 receiver + transmitter using the bitbang mode of an FTDI
-       USB-to-serial chip such as the FT232R, with a demodulating IR receiver
-       connected to one of the FTDI chips data pins -- by default, D1 (RXD).
+	Contains this additional plugin:
+	 -plugin ftdi:
+			 Mode2 receiver + transmitter using the bitbang mode of an FTDI
+			 USB-to-serial chip such as the FT232R, with a demodulating IR receiver
+			 connected to one of the FTDI chips data pins -- by default, D1 (RXD).
 endef
 
 CONFIGURE_ARGS += \
@@ -132,7 +132,7 @@ MAKE_FLAGS += \
 	DESTDIR="$(PKG_INSTALL_DIR)" \
 	ARCH="$(LINUX_KARCH)"
 
-define  Package/lirc/install
+define	Package/lirc/install
 	$(INSTALL_DIR) $(1)/usr/sbin/
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/daemons/.libs/lircd $(1)/usr/sbin/
 	$(INSTALL_DIR) $(1)/etc/lirc
@@ -150,7 +150,7 @@ define  Package/lirc/install
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/plugins/.libs/default.so $(1)/usr/lib/lirc/plugins
 endef
 
-define  Package/lirctools/install
+define	Package/lirctools/install
 	$(INSTALL_DIR) $(1)/usr/sbin/
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/tools/.libs/irsend $(1)/usr/sbin/
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/tools/.libs/irexec $(1)/usr/sbin/
@@ -159,17 +159,17 @@ define  Package/lirctools/install
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/tools/.libs/irrecord $(1)/usr/sbin/
 endef
 
-define  Package/lirc-audioalsa/install
+define	Package/lirc-audioalsa/install
 	$(INSTALL_DIR) $(1)/usr/lib/lirc/plugins
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/plugins/.libs/audio_alsa.so $(1)/usr/lib/lirc/plugins
 endef
 
-define  Package/lirc-devinput/install
+define	Package/lirc-devinput/install
 	$(INSTALL_DIR) $(1)/usr/lib/lirc/plugins
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/plugins/.libs/devinput.so $(1)/usr/lib/lirc/plugins
 endef
 
-define  Package/lirc-ftdi/install
+define	Package/lirc-ftdi/install
 	$(INSTALL_DIR) $(1)/usr/lib/lirc/plugins
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/plugins/.libs/ftdi.so $(1)/usr/lib/lirc/plugins
 endef
